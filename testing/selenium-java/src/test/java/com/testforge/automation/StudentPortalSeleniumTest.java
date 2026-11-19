@@ -4,7 +4,8 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import java.net.URL;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.time.Duration;
@@ -13,13 +14,16 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class StudentPortalSeleniumTest {
     private WebDriver driver;
-    private final String baseUrl = System.getProperty("testforge.url", "http://localhost:8080");
+    private final String baseUrl = System.getProperty("testforge.url", "http://host.docker.internal:8080");
 
-    @BeforeEach void setUp() {
+    @BeforeEach void setUp() throws Exception{
         ChromeOptions options = new ChromeOptions();
         if (Boolean.getBoolean("headless")) options.addArguments("--headless=new");
         options.addArguments("--window-size=1440,1000");
-        driver = new ChromeDriver(options); // Selenium Manager resolves the driver.
+        driver = new RemoteWebDriver(
+            new URL("http://localhost:4444"),
+            options
+        );
     }
     @AfterEach void tearDown() { if (driver != null) driver.quit(); }
 
