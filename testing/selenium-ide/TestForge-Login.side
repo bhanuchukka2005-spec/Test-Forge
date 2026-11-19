@@ -1,0 +1,22 @@
+{
+  "id": "testforge-login",
+  "version": "2.0",
+  "name": "TestForge Student Login",
+  "url": "http://localhost:8080",
+  "tests": [{
+    "id": "student-login",
+    "name": "Student login displays dashboard",
+    "commands": [
+      {"id":"1","comment":"Open TestForge","command":"open","target":"/","value":""},
+      {"id":"2","comment":"Enter student username","command":"type","target":"id=username","value":"student"},
+      {"id":"3","comment":"Enter demo password","command":"type","target":"id=password","value":"Student@123"},
+      {"id":"4","comment":"Submit login","command":"click","target":"css=button[type='submit']","value":""},
+      {"id":"5","comment":"Wait for dashboard after async login","command":"waitForElementVisible","target":"id=dashboard","value":"10000"},
+      {"id":"5b","comment":"Dashboard should be visible","command":"assertVisible","target":"id=dashboard","value":""},
+      {"id":"6","comment":"Check student name","command":"assertText","target":"id=studentName","value":"Aarav Sharma"}
+    ]
+  }],
+  "suites": [{"id":"suite-1","name":"TestForge Login Suite","tests":["student-login"]}],
+  "urls": ["http://localhost:8080/"],
+  "plugins": []
+}

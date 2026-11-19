@@ -1,0 +1,9 @@
+[run]
+branch = True
+source = .
+omit =
+    */__pycache__/*
+    */.venv/*
+[report]
+show_missing = True
+fail_under = 70
