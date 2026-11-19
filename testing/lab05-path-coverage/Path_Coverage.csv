@@ -1,0 +1,10 @@
+Path ID,Test Method,Marks,Attendance,Expected Result,Path Description
+P1,path1InvalidMarksBelowMinimum,-1,80,Invalid,Marks less than zero
+P2,path2InvalidMarksAboveMaximum,101,80,Invalid,Marks greater than one hundred
+P3,path3InvalidAttendanceBelowMinimum,70,-1,Invalid,Attendance below zero
+P4,path4InvalidAttendanceAboveMaximum,70,101,Invalid,Attendance above one hundred
+P5,path5Fail,30,80,Fail,Marks below forty
+P6,path6Pass,55,75,Pass,Marks forty to fifty-nine with sufficient attendance
+P7,path7AttendanceFailure,55,74,Fail (attendance),Marks forty to fifty-nine with insufficient attendance
+P8,path8Merit,70,80,Merit,Marks sixty to seventy-nine
+P9,path9Distinction,85,80,Distinction,Marks eighty or above
