@@ -25,3 +25,30 @@ htmlcov/
 # OS
 .DS_Store
 Thumbs.db
+
+# Maven build output
+target/
+**/target/
+
+# Downloaded tools
+.tools/
+
+# Generated JMeter run output
+testing/jmeter/run/
+
+# Local H2 database
+data/
+*.mv.db
+*.trace.db
+*.lock.db
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# IDE-generated files
+.idea/
