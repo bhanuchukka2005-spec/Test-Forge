@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion><groupId>com.testforge.performance</groupId><artifactId>testforge-gatling</artifactId><version>1.0.0</version>
+ <properties><maven.compiler.release>17</maven.compiler.release><gatling.version>3.15.1</gatling.version><scala.version>2.13.16</scala.version></properties>
+ <dependencies><dependency><groupId>io.gatling</groupId><artifactId>gatling-app</artifactId><version>${gatling.version}</version></dependency><dependency><groupId>io.gatling</groupId><artifactId>gatling-core</artifactId><version>${gatling.version}</version></dependency><dependency><groupId>io.gatling</groupId><artifactId>gatling-http</artifactId><version>${gatling.version}</version></dependency><dependency><groupId>org.scala-lang</groupId><artifactId>scala-library</artifactId><version>${scala.version}</version></dependency></dependencies>
+ <build><plugins><plugin><groupId>io.gatling</groupId><artifactId>gatling-maven-plugin</artifactId><version>4.21.12</version></plugin><plugin><groupId>net.alchim31.maven</groupId><artifactId>scala-maven-plugin</artifactId><version>4.9.2</version><executions><execution><goals><goal>add-source</goal><goal>compile</goal><goal>testCompile</goal></goals></execution></executions></plugin></plugins></build>
+</project>
