@@ -1,4 +1,5 @@
 const $ = (id) => document.getElementById(id);
+let currentRole = null;
 async function api(path, options = {}) {
   const response = await fetch(path, { credentials: 'same-origin', headers: { 'Content-Type': 'application/json', ...(options.headers || {}) }, ...options });
   const payload = response.status === 204 ? null : await response.json().catch(() => ({}));
@@ -9,6 +10,7 @@ function message(id, text, success = false) { const el = $(id); el.textContent =
 function showSignedOut() { $('loginPanel').classList.remove('hidden'); $('dashboard').classList.add('hidden'); $('sessionStatus').textContent = 'Not signed in'; }
 async function loadDashboard() {
   const me = await api('/api/auth/me');
+  currentRole = me.role;
   $('sessionStatus').textContent = `${me.username} · ${me.role}`;
   $('loginPanel').classList.add('hidden'); $('dashboard').classList.remove('hidden');
   $('welcome').textContent = me.role === 'ADMIN' ? 'Administration dashboard' : 'Welcome back';
@@ -29,9 +31,26 @@ async function loadDashboard() {
   await loadRequests();
 }
 function escapeHtml(value) { return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function setRequestListMessage(text, success = false) {
+  const el = $('requestListMessage');
+  if (!el) return;
+  el.textContent = text;
+  el.className = `message ${success ? 'success' : ''}`;
+}
+function statusLabel(status) {
+  return ({ OPEN: 'Open', IN_PROGRESS: 'In Progress', RESOLVED: 'Resolved', REJECTED: 'Rejected' })[status] || status;
+}
 async function loadRequests() {
   const list = await api('/api/requests');
-  $('requestList').innerHTML = list.length ? list.map(r => `<div class="request-item"><div><strong>${escapeHtml(r.title)}</strong><small>${escapeHtml(r.rollNumber)} · ${new Date(r.createdAt).toLocaleString()}</small></div><span class="status">${escapeHtml(r.status)}</span></div>`).join('') : 'No requests yet.';
+  $('requestList').innerHTML = list.length ? list.map(r => {
+    const isClosed = r.status === 'RESOLVED' || r.status === 'REJECTED';
+    const adminControls = currentRole === 'ADMIN'
+      ? (isClosed
+        ? '<p class="muted request-closed-note">This request is closed and cannot be changed.</p>'
+        : `<div class="request-actions"><label for="requestStatus-${r.id}">Update status<select id="requestStatus-${r.id}" class="request-status-select"><option value="OPEN" ${r.status === 'OPEN' ? 'selected' : ''}>Open</option><option value="IN_PROGRESS" ${r.status === 'IN_PROGRESS' ? 'selected' : ''}>In Progress</option><option value="RESOLVED">Resolved</option><option value="REJECTED">Rejected</option></select></label><button class="secondary request-update-button" type="button" data-update-request="${r.id}">Save status</button></div>`)
+      : '';
+    return `<details class="request-item"><summary class="request-summary"><span class="request-summary-main"><strong>${escapeHtml(r.title)}</strong><small>${escapeHtml(r.rollNumber)} · ${new Date(r.createdAt).toLocaleString()}</small></span><span class="request-summary-side"><span class="status">${escapeHtml(statusLabel(r.status))}</span><span class="request-expand-hint">View details ▾</span></span></summary><div class="request-detail"><p class="request-description">${escapeHtml(r.description)}</p>${adminControls}</div></details>`;
+  }).join('') : 'No requests yet.';
 }
 $('loginForm').addEventListener('submit', async (event) => {
   event.preventDefault(); message('loginMessage', 'Signing in…');
@@ -44,5 +63,24 @@ $('requestForm').addEventListener('submit', async (event) => {
   try { await api('/api/requests', { method: 'POST', body: JSON.stringify({ title: $('requestTitle').value.trim(), description: $('requestDescription').value.trim() }) }); $('requestForm').reset(); message('requestMessage', 'Request submitted.', true); await loadRequests(); }
   catch (error) { message('requestMessage', error.message); }
 });
-$('refreshBtn').addEventListener('click', () => loadRequests().catch(error => message('requestMessage', error.message)));
+$('refreshBtn').addEventListener('click', () => loadRequests().then(() => setRequestListMessage('Requests refreshed.', true)).catch(error => setRequestListMessage(error.message)));
+$('requestList').addEventListener('click', async (event) => {
+  const button = event.target.closest('[data-update-request]');
+  if (!button) return;
+  const requestId = button.dataset.updateRequest;
+  const select = $(`requestStatus-${requestId}`);
+  if (!select) return;
+  button.disabled = true;
+  button.textContent = 'Saving…';
+  setRequestListMessage('Updating request status…');
+  try {
+    const updated = await api(`/api/requests/${encodeURIComponent(requestId)}/status`, { method: 'PATCH', body: JSON.stringify({ status: select.value }) });
+    await loadRequests();
+    setRequestListMessage(`Request #${updated.id} updated to ${statusLabel(updated.status)}.`, true);
+  } catch (error) {
+    setRequestListMessage(error.message);
+    button.disabled = false;
+    button.textContent = 'Save status';
+  }
+});
 api('/api/auth/me').then(loadDashboard).catch(showSignedOut);
