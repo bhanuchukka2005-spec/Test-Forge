@@ -1,0 +1,27 @@
+# Java / Maven
+target/
+*.class
+*.log
+*.h2.db
+*.mv.db
+*.trace.db
+# Local database and reports
+/data/
+/reports/generated/
+# Python
+.venv/
+__pycache__/
+.pytest_cache/
+.coverage
+htmlcov/
+# IDE
+.idea/
+.vscode/
+*.iml
+# Secrets
+.env
+.env.*
+!.env.example
+# OS
+.DS_Store
+Thumbs.db
