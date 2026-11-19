@@ -1,0 +1,7 @@
+
+Test Case ID,Description,Input Data,Expected Result,Status
+TC001,Valid student login,student / Student@123,Student dashboard displayed,PASS
+TC002,Invalid username,wronguser / Student@123,Login rejected,NOT RUN
+TC003,Invalid password,student / wrongpass,Login rejected,PASS
+TC004,Empty login fields,Blank username and password,Validation displayed,PREVIOUS PASS - REVERIFY
+TC005,SQL injection attempt,SQL injection input,Login attempt rejected,NOT RUN
