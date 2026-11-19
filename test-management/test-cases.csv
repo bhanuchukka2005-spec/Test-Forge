@@ -1,0 +1,18 @@
+TC_ID,Feature,Technique,Input,Expected Result,Priority
+TC001,Login,Positive,student / Student@123,Login successful,High
+TC002,Login,Negative,student / wrong-password,401 invalid credentials,High
+TC003,Login,State transition,Three consecutive wrong passwords,Account locked,High
+TC004,Student profile,Authorization,Student session GET /api/students,403 admin access required,High
+TC005,Student profile,Positive,Student session GET /api/students/me,Own profile returned,High
+TC006,Result,Boundary value,Marks 39,Fail,High
+TC007,Result,Boundary value,Marks 40 and attendance 75,Pass,High
+TC008,Result,Boundary value,Marks 59 and attendance 74.99,Fail (attendance),High
+TC009,Result,Boundary value,Marks 60,Merit,Medium
+TC010,Result,Boundary value,Marks 80,Distinction,Medium
+TC011,Result,Invalid class,Marks -1 or 101,Invalid,High
+TC012,Service request,Positive,Valid title and description,Request created with OPEN status,Medium
+TC013,Service request,State transition,Admin changes OPEN to IN_PROGRESS,Status updated,Medium
+TC014,Service request,State transition,Admin changes RESOLVED request,409 conflict,Medium
+TC015,Health,Performance,GET /api/health under controlled load,Measure latency/error/throughput,Medium
+TC016,Login,State transition,Three wrong passwords then a fourth attempt,Account is locked and returns 423 on subsequent attempt,High
+TC017,Attendance,Boundary value,74.99 percent versus 75 percent,Attendance condition changes below/at threshold,High
