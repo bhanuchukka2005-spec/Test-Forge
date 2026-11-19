@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TestForge | Student Portal</title><link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar"><div class="brand"><span class="logo">T</span><div><strong>TestForge</strong><small>Student Portal · Application Under Test</small></div></div><div id="sessionStatus" class="session">Not signed in</div></header>
+  <main class="shell">
+    <section class="hero"><div><p class="eyebrow">SOFTWARE QUALITY ENGINEERING LAB</p><h1>One portal. Fourteen testing experiments.</h1><p class="muted">A realistic campus workflow for functional, automation, security, coverage and performance testing.</p></div><div class="heroMark">QA</div></section>
+    <section id="loginPanel" class="panel login-panel">
+      <div><p class="eyebrow">DEMO ACCESS</p><h2>Sign in to the portal</h2><p class="muted">Use one of the local demo accounts to explore the system.</p></div>
+      <form id="loginForm" class="form-grid"><label>Username<input id="username" autocomplete="username" required value="student"></label><label>Password<input id="password" type="password" autocomplete="current-password" required value="Student@123"></label><button class="primary" type="submit">Sign in <span>→</span></button><p id="loginMessage" class="message"></p></form>
+      <div class="demo-accounts"><span><b>Student</b> student / Student@123</span><span><b>Admin</b> admin / Admin@123</span></div>
+    </section>
+    <section id="dashboard" class="hidden">
+      <div class="section-heading"><div><p class="eyebrow">LIVE APPLICATION DATA</p><h2 id="welcome">Dashboard</h2></div><button id="logoutBtn" class="secondary">Log out</button></div>
+      <div class="metrics"><article class="metric"><span>Student</span><strong id="studentName">—</strong><small id="studentRoll">—</small></article><article class="metric"><span>Attendance</span><strong id="attendance">—</strong><small>Current recorded percentage</small></article><article class="metric"><span>Marks</span><strong id="marks">—</strong><small>Out of 100</small></article><article class="metric"><span>Result</span><strong id="result">—</strong><small>Calculated by server-side rules</small></article></div>
+      <div class="content-grid"><section class="panel"><div class="panel-head"><div><p class="eyebrow">ACADEMIC RECORD</p><h3>Student profile</h3></div><span class="tag">/api/students/me</span></div><div id="profile" class="details muted">Sign in to load your profile.</div></section>
+      <section class="panel"><div class="panel-head"><div><p class="eyebrow">STUDENT SERVICES</p><h3>Create a service request</h3></div><span class="tag">/api/requests</span></div><form id="requestForm" class="form-grid"><label>Request title<input id="requestTitle" maxlength="120" required placeholder="e.g. Correct attendance entry"></label><label>Description<textarea id="requestDescription" rows="3" maxlength="2000" required placeholder="Explain what needs attention"></textarea></label><button class="primary" type="submit">Submit request</button><p id="requestMessage" class="message"></p></form></section></div>
+      <section class="panel"><div class="panel-head"><div><p class="eyebrow">TRACKING</p><h3>My service requests</h3></div><button id="refreshBtn" class="secondary">Refresh</button></div><div id="requestList" class="request-list muted">No requests yet.</div></section>
+      <section id="adminPanel" class="panel hidden"><div class="panel-head"><div><p class="eyebrow">ADMIN TOOLS</p><h3>Student records</h3></div><span class="tag">Admin only</span></div><div id="studentList" class="table-wrap"></div></section>
+    </section>
+    <section class="footnote"><span class="dot"></span><p>Local educational demo only. Do not expose this sample app to the public internet or use real student data.</p></section>
+  </main>
+  <script src="/app.js" defer></script>
+</body></html>
