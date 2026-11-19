@@ -14,4 +14,27 @@ class ResultCalculatorTest {
     @Test void seventyNineIsMerit() { assertEquals("Merit", ResultCalculator.calculate(79, 50)); }
     @Test void eightyIsDistinction() { assertEquals("Distinction", ResultCalculator.calculate(80, 0)); }
     @Test void oneHundredIsDistinction() { assertEquals("Distinction", ResultCalculator.calculate(100, 100)); }
+    @Test
+    void invalidAttendanceBelowMinimum() {
+        assertEquals("Invalid",
+            ResultCalculator.calculate(70, -0.01));
+    }
+
+    @Test
+    void zeroMarksIsValidButFail() {
+        assertEquals("Fail",
+            ResultCalculator.calculate(0, 80));
+    }
+
+    @Test
+    void oneMarkIsFail() {
+        assertEquals("Fail",
+            ResultCalculator.calculate(1, 80));
+    }
+
+    @Test
+    void ninetyNineMarksIsDistinction() {
+        assertEquals("Distinction",
+            ResultCalculator.calculate(99, 80));
+    }
 }
