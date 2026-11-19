@@ -1,0 +1,17 @@
+﻿Test Case ID,Description,Input,Expected Result,Previously Reported Status,Notes
+TC001,Valid student login,Valid student demo account,Student dashboard displayed,PASS,Reverify on cloned laptop
+TC002,Invalid student password,Student username and incorrect password,Login rejected,PASS,Reverify on cloned laptop
+TC003,Missing username,Blank username and valid password,Username validation displayed,PASS,Previously observed browser validation
+TC004,Empty login fields,Both fields blank,Required-field validation displayed,PASS,Previously observed browser validation
+TC005,Student logout,Authenticated student session,User is logged out,PASS,Reverify on cloned laptop
+TC006,Student profile,Authenticated student opens profile,Profile information displayed,PASS,Reverify on cloned laptop
+TC007,Attendance page,Authenticated student opens attendance,Attendance page displayed,PARTIAL,Subject-wise attendance was previously absent
+TC008,Results page,Authenticated student opens results,Results summary displayed,PASS,Reverify on cloned laptop
+TC009,Create service request,Student submits request,Request is recorded,PASS,Reverify on cloned laptop
+TC010,Admin views request,Administrator opens requests,Student request is visible,PASS,Reverify on cloned laptop
+TC011,Admin updates request,Administrator changes request status,Updated status is saved,PASS,Previously changed to In Progress
+TC012,Student views updated request,Student opens submitted request,Updated status is visible,PASS,Reverify on cloned laptop
+TC013,Admin student records,Administrator opens records,Student records table displayed,PASS,Reverify on cloned laptop
+TC014,Student UI restrictions,Student opens dashboard,Admin tools hidden,UI PASS,UI visibility only; not proof of backend authorization
+TC015,Student API authorization,Student requests /api/students,HTTP 403,PASS,Previously observed
+TC016,Admin API authorization,Admin requests /api/students,HTTP 200,PASS,Previously observed

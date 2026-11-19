@@ -1,0 +1,6 @@
+﻿Test Case ID,Description,Testing Type,Criteria,Status,Notes
+NFC001,Login response time,Performance,Login should complete within 2 seconds,NOT MEASURED,Manual lab criterion
+NFC002,UI readability,Usability,Labels and text should be readable,NOT VERIFIED,Requires UI inspection
+NFC003,Password masking,Security,Password characters should be masked,NOT VERIFIED,Recheck on demonstration laptop
+NFC004,Cross-browser compatibility,Compatibility,Login works in Chrome Firefox and Edge,NOT RUN,Grid demonstration currently uses Chrome
+NFC005,Concurrent login handling,Load Testing,Application handles 50 concurrent logins,NOT RUN,Lab 13 tested homepage with 10 users and 2 iterations
