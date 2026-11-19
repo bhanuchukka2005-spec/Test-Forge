@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion><groupId>com.testforge.automation</groupId><artifactId>selenium-tests</artifactId><version>1.0.0</version>
-  <properties><testforge.url>http://localhost:8080</testforge.url><maven.compiler.release>17</maven.compiler.release><selenium.version>4.52.0</selenium.version><junit.version>5.13.4</junit.version></properties>
+  <properties><testforge.url>http://host.docker.internal:8080</testforge.url><maven.compiler.release>17</maven.compiler.release><selenium.version>4.52.0</selenium.version><junit.version>5.13.4</junit.version></properties>
   <dependencies>
     <dependency><groupId>org.seleniumhq.selenium</groupId><artifactId>selenium-java</artifactId><version>${selenium.version}</version></dependency>
     <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>${junit.version}</version><scope>test</scope></dependency>
