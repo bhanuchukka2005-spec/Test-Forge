@@ -1,0 +1,7 @@
+Defect ID: DEF-001
+Title: Expected and actual login results do not match
+Test Case: TC002
+Expected: Login Successful
+Actual: Login Failed
+Priority: High
+Status: New

@@ -1,0 +1,12 @@
+[
+    {
+        "defect_id": "DEF-001",
+        "title": "Expected and actual login results do not match",
+        "test_case_id": "TC002",
+        "steps": "Enter admin and wrongpass, then click Login",
+        "expected": "Login Successful",
+        "actual": "Login Failed",
+        "priority": "High",
+        "status": "New"
+    }
+]
